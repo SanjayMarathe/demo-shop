@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   let confirmation;
   if (total > 500) {
     // large orders get routed through the receipt service before confirming
-    const receipt = getReceipt(total);
+    const receipt = getReceipt(total) ?? { code: `ORD-${Date.now()}` };
     confirmation = { code: receipt.code };
   } else {
     confirmation = { code: `ORD-${Date.now()}` };
